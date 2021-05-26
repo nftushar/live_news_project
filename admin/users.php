@@ -1,5 +1,5 @@
 <?php include "header.php";
-// session_start();
+session_start();
 if ($_SESSION['role'] == 0) {
     header("location:post.php");
 }

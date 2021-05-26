@@ -16,6 +16,7 @@
                     $fname       = mysqli_real_escape_string($connection, $_POST['fname']);
                     $lname       = mysqli_real_escape_string($connection, $_POST['lname']);
                     $user        = mysqli_real_escape_string($connection, $_POST['user']);
+                    // $password    = mysqli_real_escape_string($connection, $_POST['password']);
                     $password    = mysqli_real_escape_string($connection, md5($_POST['password']));
                     $role        = mysqli_real_escape_string($connection, $_POST['role']);
 
@@ -29,10 +30,11 @@
                     if ($count > 0) {
                         echo "Username  Already Existc";
                     } else {
-                        $query1 = "INSERT INTO user (first_name,last_name,username,password,role)
+                        // $query1 = "INSERT INTO user (first_name,last_name,username,password,role)
+                        $query1 = "INSERT INTO user (first_name, last_name, username, password, role)
                          VALUE ('$fname','$lname','$user','$password','$role')";
 
-                        $result = mysqli_query($connection, $query1) or die("Query Failed") or die('Query faild');
+                        $result = mysqli_query($connection, $query1) or die('Query faild');
 
                         if($result){
                             header("location: users.php");

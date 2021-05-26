@@ -18,7 +18,6 @@ if ($_SESSION['role'] == 0) {
                 include "config.php";
                 $post_id = $_GET['id'];
                 // var_dump($post_id);
-
                 $query = "SELECT post.post_id, post.title, post.description, post.post_img, post.category, category.category_name FROM post 
               LEFT JOIN category ON post.category = category.category_id
               LEFT JOIN user ON post.author = user.user_id
@@ -76,9 +75,9 @@ if ($_SESSION['role'] == 0) {
                     </div>
                     <div class="form-group">
                         <label for="">Post image</label>
-                        <input type="file" name="new-image" />
+                        <input type="file" name="new-image"/>
                         <img src="upload/<?php echo $row['post_img']; ?>" height="150px">
-                        <input type="hidden" name="old_image" value="<?php echo $row['post_img']; ?>">
+                        <input type="hidden" name="old_image" value="<?php echo $row['post_img'];?>">
                     </div>
                     <input type="submit" name="submit" class="btn btn-primary" value="Update" />
                 </form>

@@ -20,17 +20,17 @@
                     $page_number = 1;
                 }
 
-                $offset = ($page_number - 1) * $limit;
+                $offset = ($page_number - '1') * $limit;
 
-                if ($_SESSION['role'] == 1) {
+                if ($_SESSION['role'] == '1') {
 
-                    $query = "SELECT post.post_id, post.title, post.description, post.post_date,
+                    $query = "SELECT post.post_id, post.title, post.description, post.post_date, post.category,post.post_img,
                  category.category_name, user.username FROM post 
                 LEFT JOIN category ON post.category = category.category_id
                 LEFT JOIN user ON post.author = user.user_id
                 ORDER BY  post.post_id DESC LIMIT {$offset}, {$limit}";
-                } elseif ($_SESSION['role'] == 0) {
-                    $query = "SELECT post.post_id, post.title, post.description, post.post_date,
+                } elseif ($_SESSION['role'] == '0') {
+                    $query = "SELECT post.post_id, post.title, post.description, post.post_date,post.category,
                 category.category_name, user.username FROM post 
                LEFT JOIN category ON post.category = category.category_id
                LEFT JOIN user ON post.author = user.user_id
@@ -47,6 +47,7 @@
                 <table class="content-table">
                     <thead>
                         <th>S.No.</th>
+                        <th>Image</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Date</th>
@@ -62,6 +63,7 @@
                             ?>
                         <tr>
                             <td class='id'><?php echo $serial++ ?></td>
+                            <td><img height="90" src="upload/<?php echo $row['post_img'] ?>" alt=""></td>
                             <td><?php echo $row['title'] ?></td>
                             <td><?php echo $row['category_name'] ?></td>
                             <td><?php echo $row['post_date'] ?></td>
@@ -70,7 +72,7 @@
                             <td class='edit'><a href="update-post.php?id=<?php echo $row['post_id'] ?>">
                                     <i class='fa fa-edit'></i></a></td>
 
-                            <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id'] ?>'>
+                            <td class='delete'><a onclick="return confirm('Are You Sure.?')" href='delete-post.php?id=<?php echo $row['post_id'] ?>&catid=<?php echo $row['category']?>'>
                                     <i class='fa fa-trash-o'></i></a></td>
                         </tr>
 
